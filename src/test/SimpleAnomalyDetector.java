@@ -1,5 +1,4 @@
 package test;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -10,7 +9,7 @@ public class SimpleAnomalyDetector implements TimeSeriesAnomalyDetector {
 	List<AnomalyReport> anomalyReports = new ArrayList<>();
 
 	@Override
-	public void learnNormal(@NotNull TimeSeries ts) {
+	public void learnNormal(TimeSeries ts) {
 
 		Set<String> used = new HashSet<>();
 		float newThreshold =0;
@@ -47,7 +46,7 @@ public class SimpleAnomalyDetector implements TimeSeriesAnomalyDetector {
 		return fixed;
 	}
 
-	public Point[] pointsMaker(@NotNull TimeSeries ts, String a, String b){
+	public Point[] pointsMaker(TimeSeries ts, String a, String b){
 		int size = ts.table.get(a).size();
 		Point[] points = new Point[size];
 		for(int i = 0; i < size; i++){
@@ -57,7 +56,7 @@ public class SimpleAnomalyDetector implements TimeSeriesAnomalyDetector {
 	}
 
 	// see max dev for the matching columns
-	public float maxDev(Line line, Point @NotNull [] points){
+	public float maxDev(Line line, Point[] points){
 		float max = 0,tmp;
 		for(int i = 0; i < points.length; i++){
 			tmp = StatLib.dev(points[i],line);
@@ -66,6 +65,7 @@ public class SimpleAnomalyDetector implements TimeSeriesAnomalyDetector {
 		}
 		return (max*1.1f);
 	}
+
 	@Override
 	public List<AnomalyReport> detect(TimeSeries ts) {
 		CorrelatedFeatures corrent;
