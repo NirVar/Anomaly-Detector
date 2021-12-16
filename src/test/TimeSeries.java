@@ -6,20 +6,41 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 
-
 public class TimeSeries {
 
 	HashMap <String,ArrayList<Float>> table = new HashMap<>();
+	int numberOfColumns;
 	
 	public TimeSeries(String csvFileName) {
+
 		Scanner scanner;
+		String[] headers = null;
+		String[] values = null;
+		String line = null;
+
 		try {
 			File file = new File(csvFileName);
 			scanner = new Scanner(file);
-			while (scanner.hasNextLine()){
-				String data = scanner.nextLine();
+			// read the first line- headers
+			line = scanner.next();
+			headers = line.split(",");
+			this.numberOfColumns = headers.length;
 
+			// inserts the headers (keys) of the map and empty Arraylist.
+			for (int i =0; i< numberOfColumns; i++){
+				ArrayList<Float> list = new ArrayList<>();
+				table.put(headers[i], list);
 			}
+
+			while (scanner.hasNext()){
+				line = scanner.next();
+				values = line.split(",");
+				for (int i =0; i < headers.length; i++){
+					table.get(headers[i]).add(Float.parseFloat(values[i]));
+				}
+			}
+
+
 
 		} catch (FileNotFoundException e) {
 			System.out.println("An error occurred.");

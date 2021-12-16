@@ -3,7 +3,6 @@ package test;
 
 
 public class StatLib {
-
 	
 
 	// simple average
