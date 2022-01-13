@@ -5,11 +5,13 @@ import java.util.*;
 
 public class SimpleAnomalyDetector implements TimeSeriesAnomalyDetector {
 	float threshold = 0.9f;
-	List<CorrelatedFeatures> correlatedFeaturesList = new ArrayList<>();
+	List<CorrelatedFeatures> correlatedFeaturesList = new ArrayList<CorrelatedFeatures>();
 	List<AnomalyReport> anomalyReports = new ArrayList<>();
+	int totalTimeSteps;
 
 	@Override
 	public void learnNormal(TimeSeries ts) {
+		totalTimeSteps = ts.totalTimeSteps;
 
 		Set<String> used = new HashSet<>();
 		float newThreshold =0;

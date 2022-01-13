@@ -1,4 +1,5 @@
 package test;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class TimeSeries {
 
 	HashMap <String,ArrayList<Float>> table = new HashMap<>();
 	int numberOfColumns;
+	int totalTimeSteps;
 	
 	public TimeSeries(String csvFileName) {
 
@@ -39,8 +41,8 @@ public class TimeSeries {
 					table.get(headers[i]).add(Float.parseFloat(values[i]));
 				}
 			}
-
-
+			totalTimeSteps= table.get("A").size();
+			scanner.close();
 
 		} catch (FileNotFoundException e) {
 			System.out.println("An error occurred.");
