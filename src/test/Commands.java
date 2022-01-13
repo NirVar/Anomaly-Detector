@@ -101,7 +101,7 @@ public class Commands {
 
 		@Override
 		public void execute() {
-			dio.write(description);
+			dio.write(this.description);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class Commands {
 
 		@Override
 		public void execute() {
-			dio.write("Please upload your local train CSV file");
+			dio.write("Please upload your local train CSV file.\n");
 			String trainFile = "anomalyTrain.csv";
 			String testFile = "anomalyTest.csv";
 			if (dio.CreateFile(trainFile) && dio.CreateFile(testFile)) {
@@ -136,7 +136,7 @@ public class Commands {
 		@Override
 		public void execute() {
 			dio.write("The current correlation threshold is ");
-			dio.write(anomalyDetector.threshold + "\n" + "Type a new threshold");
+			dio.write(anomalyDetector.threshold + "\n" + "Type a new threshold\n");
 			Float newThreshold = dio.readVal();
 			if (newThreshold > 1 || newThreshold < 0) {
 				dio.write("please choose a value between 0 and 1.\n");
@@ -262,9 +262,8 @@ public class Commands {
 			super("Exit the program");
 		}
 		@Override
-		public void execute(){
-			dio.write("bye");
-		}
+		public void execute(){}
+
 	}
 
 }
